@@ -28,18 +28,16 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func AddCountries(w http.ResponseWriter, r *http.Request) {
 	var newcountry Country
-
-	data, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		panic(err)
-	}
-
-	err = json.Unmarshal(data, &newcountry)
+	
+	err := json.NewDecoder(r.Body).Decode(&newcountry)
 	if err != nil {
 		panic(err)
 	}
 
 	Countries = append(Countries, newcountry)
+	
+	fmt.Fprint(w, "Fue agregado con exirto")
+
 
 }
 func Listcountries(w http.ResponseWriter, r *http.Request) {
