@@ -43,7 +43,10 @@ func AddCountries(w http.ResponseWriter, r *http.Request) {
 func Listcountries(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	json.NewEncoder(w).Encode(Countries)
+	err := json.NewEncoder(w).Encode(Countries)
+	if err != nil {
+		panic(err)
+	}
 
 	return
 }
